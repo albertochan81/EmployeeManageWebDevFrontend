@@ -13,6 +13,8 @@ export default class EmployeeList extends Component {
     this.setActiveEmployee = this.setActiveEmployee.bind(this);
     this.removeAllEmployees = this.removeAllEmployees.bind(this);
     this.searchTitle = this.searchTitle.bind(this);
+    this.deleteEmployee = this.deleteEmployee.bind(this);
+
 
     this.state = {
       employees: [],
@@ -54,6 +56,25 @@ export default class EmployeeList extends Component {
       });
   }
 
+  deleteEmployee() {    
+    EmployeeDataService.delete(this.state.currentEmployee.id)
+    
+      .then(response => {
+        console.log(response.data);
+        const updatedEmployees = this.state.employees.filter(
+          employee => employee.id !== this.state.currentEmployee.id
+        );
+        this.setState({
+          employees: updatedEmployees,
+          currentEmployee: null,
+          currentIndex: -1
+        });
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  }
+  
   getTask() {
     TaskDataService.getAll()
       .then(response => {
@@ -147,13 +168,18 @@ export default class EmployeeList extends Component {
             key={index}
             >
             {employee.first_name + " " + employee.last_name}
+            <button
+              className="m-3 btn btn-sm btn-danger"
+              onClick={this.deleteEmployee}>
+                Delete
+              </button>
             </li>
           ))
           : 
             <li className="list-group-item">
               <div><p>{"No data to display"}</p></div>
             </li>
-          }
+            }
           </ul>
 
           <button
@@ -184,15 +210,18 @@ export default class EmployeeList extends Component {
                 <label>
                   <strong>Tasks:</strong>
                 </label>
-                { tasks.filter(task => task.employeeId === currentEmployee.id).map((task) => (
+                {tasks.filter(task => task.employeeId === currentEmployee.id).length === 0 ? (
+                  <p>No tasks assigned</p>
+                ):
+                tasks.filter(task => task.employeeId === currentEmployee.id).map((task) => (
                   
                       <li>
-                        {task ? (task.description):("No data to display")}
+                        {(task.description)}
                       </li>
                       
-                    ))} 
-                    {//currentEmployee.tasks ? (" ") : (<div><p>{"No tasks assigned"}</p></div>)
-                    }
+                ))} 
+                
+                    
              
               </div>
 
