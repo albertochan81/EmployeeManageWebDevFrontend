@@ -11,7 +11,8 @@ export default class TaskList extends Component {
     this.refreshList = this.refreshList.bind(this);
     this.setActiveTask = this.setActiveTask.bind(this);
     this.removeAllTasks = this.removeAllTasks.bind(this);
-   
+    this.deleteTask = this.deleteTask.bind(this);
+
 
     this.state = {
       tasks: [],
@@ -77,6 +78,23 @@ export default class TaskList extends Component {
     });
   }
 
+  deleteTask() {    
+    TaskDataService.delete(this.state.currentTask.id)
+      .then(response => {
+        const updatedTasks = this.state.tasks.filter(
+          task => task.id !== this.state.currentTask.id
+        );
+        this.setState({
+          tasks: updatedTasks,
+          currentTask: null,
+          currentIndex: -1
+        });
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  }
+
   removeAllTasks() {
     TaskDataService.deleteAll()
       .then(response => {
@@ -109,6 +127,10 @@ export default class TaskList extends Component {
                 >
                   
                   {task.description}
+                  <button className="m-3 btn btn-sm btn-danger"
+                  onClick={this.deleteTask}>
+                    Delete
+                  </button>
                 </li>
               ))
               :
