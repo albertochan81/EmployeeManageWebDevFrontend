@@ -153,7 +153,7 @@ export default class EmployeeList extends Component {
             <li className="list-group-item">
               <div><p>{"No data to display"}</p></div>
             </li>
-          }
+            }
           </ul>
 
           <button
@@ -184,15 +184,18 @@ export default class EmployeeList extends Component {
                 <label>
                   <strong>Tasks:</strong>
                 </label>
-                { tasks.filter(task => task.employeeId === currentEmployee.id).map((task) => (
+                {tasks.filter(task => task.employeeId === currentEmployee.id).length === 0 ? (
+                  <p>No tasks assigned</p>
+                ):
+                tasks.filter(task => task.employeeId === currentEmployee.id).map((task) => (
                   
                       <li>
-                        {task ? (task.description):("No data to display")}
+                        {(task.description)}
                       </li>
                       
-                    ))} 
-                    {//currentEmployee.tasks ? (" ") : (<div><p>{"No tasks assigned"}</p></div>)
-                    }
+                ))} 
+                
+                    
              
               </div>
 
