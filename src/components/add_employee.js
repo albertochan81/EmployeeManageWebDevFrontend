@@ -15,28 +15,38 @@ export default class AddEmployee extends Component {
       first_name: "",
       last_name: "",
       department: "", 
+      invalidDep: false,
       submitted: false,
+      invalidFirstName: false,
+      invalidLastName: false
     };
   }
 
   onChangeLastName(e) {
     this.setState({
-      last_name: e.target.value
+      last_name: e.target.value,
+      invalidLastName: e.target.value.length === 0 || !e.target.value.match(/[a-zA-Z]/)
     });
   }
   onChangeFirstName(e) {
     this.setState({
-      first_name: e.target.value
+      first_name: e.target.value,
+      invalidFirstName: e.target.value.length === 0 || !e.target.value.match(/[a-zA-Z]/)
     });
   }
 
   onChangeDepartment(e) {
     this.setState({
-      department: e.target.value
+      department: e.target.value,
+      invalidDep: e.target.value.length === 0 || !e.target.value.match(/[a-zA-Z]/)
     });
   }
 
   saveEmployee() {
+    if (this.state.invalidFirstName || this.state.invalidLastName|| this.state.invalidDep) { // don't save if name is invalid
+      return;
+    }
+
     var data = {
       first_name: this.state.first_name,
       last_name: this.state.last_name,
@@ -65,7 +75,9 @@ export default class AddEmployee extends Component {
       first_name: "",
       last_name: "",
       department: "",
+      invalidDep: false,
       submitted: false,
+      invalidName: false,
     });
   }
 
@@ -92,6 +104,7 @@ export default class AddEmployee extends Component {
                 onChange={this.onChangeFirstName}
                 name="first_name"
               />
+              {this.state.invalidFirstName && <div className="invalid-first-name">Please enter a valid first name</div>}
             </div>
 
             <div className="form-group">
@@ -105,6 +118,7 @@ export default class AddEmployee extends Component {
                 onChange={this.onChangeLastName}
                 name="last_name"
               />
+              {this.state.invalidLastName && <div className="invalid-last-name">Please enter a valid last name</div>}
             </div>
 
             <div className="form-group">
@@ -118,6 +132,7 @@ export default class AddEmployee extends Component {
                 onChange={this.onChangeDepartment}
                 name="department"
               />
+              {this.state.invalidDep && <div className="invalid-dep">Please enter a valid department </div>}
             </div>
 
             <button onClick={this.saveEmployee} className="btn btn-success">
