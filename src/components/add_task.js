@@ -15,21 +15,29 @@ export default class AddTask extends Component {
       priority_level: "",
       completition_stat: false, 
       submitted: false,
+      invalidDesc: false,
+      invalidPriority: false
     };
   }
 
   onChangePriorityLevel(e) {
     this.setState({
-      priority_level: e.target.value
+      priority_level: e.target.value,
+      invalidPriority: e.target.value.toLowerCase() != "high" && e.target.value.toLowerCase() != "medium" && e.target.value.toLowerCase() != "low"
     });
   }
   onChangeDescription(e) {
     this.setState({
-      description: e.target.value
+      description: e.target.value,
+      invalidDesc: e.target.value.length === 0 || !e.target.value.match(/[a-zA-z]/)
     });
   }
 
   saveTask() {
+    if(this.state.invalidDesc || this.state.invalidPriority){
+      return;
+    }
+
     var data = {
       description: this.state.description,
       priority_level: this.state.priority_level
@@ -58,6 +66,8 @@ export default class AddTask extends Component {
       priority_level: "",
       completition_stat: false,
       submitted: false,
+      invalidDesc: false,
+      invalidPriority: false
     });
   }
 
@@ -84,6 +94,7 @@ export default class AddTask extends Component {
                 onChange={this.onChangeDescription}
                 name="description"
               />
+              {this.state.invalidDesc && <div className="invalid-desc">Please enter a valid description</div>}
             </div>
 
             <div className="form-group">
@@ -97,6 +108,7 @@ export default class AddTask extends Component {
                 onChange={this.onChangePriorityLevel}
                 name="priority_level"
               />
+              {this.state.invalidPriority && <div className="invalid-priority">Please enter high, medium, or low </div>}
             </div>
 
             <button onClick={this.saveTask} className="btn btn-success">
