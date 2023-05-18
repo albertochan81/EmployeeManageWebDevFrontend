@@ -162,8 +162,8 @@ class Employee extends Component {
           message: "Employee Task was updated successfully!"
       });
     })
-      .catch(er => {
-        console.log(er);
+      .catch(e => {
+        console.log(e);
       });
 
   }
@@ -242,13 +242,17 @@ class Employee extends Component {
                 />
               </div>
 
-              <div className="col-md-6">
-              <div className="col-md-6">
+              <div className="col-lg-5">
+              <div className="col-lg-5">
           {currentTask ? (
             <div>
-              <h6>Selected Task: </h6> 
+              <h6  >Selected task:</h6>
               <div>
-                {currentTask.description}
+                {currentTask.description? (currentTask.description): (
+                  <div>
+                  <p>  &emsp; Click on a Task </p>
+                </div>
+                )}
               </div>
 
               {currentTask.employeeId !== currentEmployee.id ? (
@@ -270,7 +274,6 @@ class Employee extends Component {
             </div>
           ) : (
             <div>
-              <br />
               <p>Click on a Task </p>
             </div>
           )}
@@ -281,6 +284,8 @@ class Employee extends Component {
                 Go to task
               </Link>
         </div>
+
+
                 <label>
                   <strong>Tasks:</strong>
                 </label>
@@ -297,13 +302,11 @@ class Employee extends Component {
                         {tasks.length === 0 ? (<div><p>{"No data to display"}</p></div>):(task.description)}
                       </li>
                     ))}
-                    
 
               </div>
             </form>
-            <div className="col-md-6"> 
+            <div className="col-lg-6"> 
             <br></br>
-            
             <strong>Unassigned tasks:</strong>
 
             <ul className="list-group">
@@ -321,9 +324,8 @@ class Employee extends Component {
                 </li>
               ))}
               </ul>
-              
           </div>
-    
+          
           </div>
         ) : (
           <div>
@@ -333,7 +335,6 @@ class Employee extends Component {
         )}
 
           
-
       </div>
     );
   }
