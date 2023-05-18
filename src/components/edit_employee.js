@@ -162,8 +162,8 @@ class Employee extends Component {
           message: "Employee Task was updated successfully!"
       });
     })
-      .catch(e => {
-        console.log(e);
+      .catch(er => {
+        console.log(er);
       });
 
   }
@@ -203,6 +203,7 @@ class Employee extends Component {
             >
               Update
             </button>
+            <p>{this.state.message}</p>
             <form>
               <div className="form-group">
                 <label htmlFor="first_name">
@@ -245,7 +246,7 @@ class Employee extends Component {
               <div className="col-md-6">
           {currentTask ? (
             <div>
-              <h4>Selected Task: </h4> 
+              <h6>Selected Task: </h6> 
               <div>
                 {currentTask.description}
               </div>
@@ -322,10 +323,7 @@ class Employee extends Component {
               </ul>
               
           </div>
-          
-
-            
-            <p>{this.state.message}</p>
+    
           </div>
         ) : (
           <div>
