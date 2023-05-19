@@ -7,12 +7,10 @@ import TaskDataService from "../services/task.service";
 export default class EmployeeList extends Component {
   constructor(props) {
     super(props);
-    this.onChangeSearchTitle = this.onChangeSearchTitle.bind(this);
     this.getEmployee = this.getEmployee.bind(this);
     this.refreshList = this.refreshList.bind(this);
     this.setActiveEmployee = this.setActiveEmployee.bind(this);
     this.removeAllEmployees = this.removeAllEmployees.bind(this);
-    this.searchTitle = this.searchTitle.bind(this);
     this.deleteEmployee = this.deleteEmployee.bind(this);
 
 
@@ -22,7 +20,6 @@ export default class EmployeeList extends Component {
       currentIndex: -1,
       searchTitle: "",
     
-
     tasks: [],
     currentTask: null,
     currentTaskIndex: -1,
@@ -33,14 +30,6 @@ export default class EmployeeList extends Component {
   componentDidMount() {
     this.getEmployee();
     this.getTask();
-  }
-
-  onChangeSearchTitle(e) {
-    const searchTitle = e.target.value;
-
-    this.setState({
-      searchTitle: searchTitle
-    });
   }
 
   getEmployee() {
@@ -114,49 +103,11 @@ export default class EmployeeList extends Component {
       });
   }
 
-  searchTitle() {
-    this.setState({
-      currentEmployee: null,
-      currentIndex: -1
-    });
-
-    EmployeeDataService.findByTitle(this.state.searchTitle)
-      .then(response => {
-        this.setState({
-          employees: response.data
-        });
-        console.log(response.data);
-      })
-      .catch(e => {
-        console.log(e);
-      });
-  }
-
   render() {
     const { searchTitle, employees, currentEmployee, currentIndex, tasks } = this.state;
 
     return (
       <div className="list row">
-        <div className="col-md-8">
-          <div className="input-group mb-3">
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Search by title"
-              value={searchTitle}
-              onChange={this.onChangeSearchTitle}
-            />
-            <div className="input-group-append">
-              <button
-                className="btn btn-outline-secondary"
-                type="button"
-                onClick={this.searchTitle}
-              >
-                Search
-              </button>
-            </div>
-          </div>
-        </div>
         <div className="col-md-6">
           <h4>Employee List</h4>
 
