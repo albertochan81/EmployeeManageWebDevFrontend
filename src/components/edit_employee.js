@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 import EmployeeDataService from "../services/employee.service";
 import { withRouter } from '../common/with-router';
-
-//
-
 import TaskDataService from "../services/task.service";
 import { Link } from "react-router-dom";
 
