@@ -143,7 +143,7 @@ class Employee extends Component {
 
   setEmployeeTask(e){
     var data = {
-      employeeId: e
+      employeeId: e,
     };
 
     TaskDataService.update(this.state.currentTask.id, data)
