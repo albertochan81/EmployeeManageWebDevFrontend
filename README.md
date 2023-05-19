@@ -7,3 +7,5 @@ or
 yarn start
 
 https://recordit.co/erh5qoAhOY
+
+Link to access remotely: https://final-frontend-group7.herokuapp.com/employees
