@@ -24,6 +24,8 @@ class Task extends Component {
         description: "",
         priority_level: "",
         completition_stat: false,
+        invalidDesc: false,
+        invalidPriority: false
       },
 
       employees: [],
@@ -46,7 +48,8 @@ class Task extends Component {
       return {
         currentTask: {
           ...prevState.currentTask,
-          description: description
+          description: description,
+          invalidDesc: description.length === 0 || !description.match(/[a-zA-z]/)
         }
       };
     });
@@ -58,7 +61,8 @@ class Task extends Component {
       return {
         currentTask: {
           ...prevState.currentTask,
-          priority_level: priority_level
+          priority_level: priority_level,
+          invalidPriority: priority_level.toLowerCase() != "high" && e.target.value.toLowerCase() != "medium" && e.target.value.toLowerCase() != "low"
         }
       };
     });
@@ -87,6 +91,9 @@ class Task extends Component {
   }
 
   setEmployeeTask(e){
+    if(this.state.invalidDesc || this.state.invalidPriority){
+      return;
+    }
     var data = {
       employeeId: e
     };
@@ -137,6 +144,9 @@ class Task extends Component {
     });
   }
   asignTask(e){
+    if(this.state.invalidDesc || this.state.invalidPriority){
+      return;
+    }
     var data = {
       employeeId: e
     };
@@ -185,6 +195,7 @@ class Task extends Component {
   
 
   updateTask() {
+    
     TaskDataService.update(
       this.state.currentTask.id,
       this.state.currentTask
@@ -229,6 +240,7 @@ class Task extends Component {
                   value={currentTask.description}
                   onChange={this.onChangeDescription}
                 />
+                {this.state.invalidDesc && <div className="invalid-desc">Please enter a valid description</div>}
               </div>
               <div className="form-group">
                 <label htmlFor="last_name">Priority Level</label>
@@ -239,6 +251,8 @@ class Task extends Component {
                   value={currentTask.priority_level}
                   onChange={this.onChangePriorityLevel}
                 />
+                              {this.state.invalidPriority && <div className="invalid-priority">Please enter high, medium, or low </div>}
+
               </div>
 
               <div className="form-group">
