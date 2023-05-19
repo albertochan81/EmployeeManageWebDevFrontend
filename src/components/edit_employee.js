@@ -143,9 +143,6 @@ class Employee extends Component {
 
   setEmployeeTask(e){
     var data = {
-      id: this.state.currentTask.id,
-      description: this.state.currentTask.description,
-      priority_level: this.state.currentTask.priority_level,
       employeeId: e
     };
 
