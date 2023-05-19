@@ -27,6 +27,10 @@ class Employee extends Component {
         first_name: "",
         last_name: "",
         department: "",
+        invalidDep: false,
+        invalidFirstName: false,
+        invalidLastName: false
+        
         
       },
       tasks: [],
@@ -34,7 +38,9 @@ class Employee extends Component {
         id:null,
         description:"",
         priority_level:"",
-        employeeId: null,
+        //invalidDesc: false,
+        //invalidPriority: false,
+        employeeId: null
       },
       currentTaskIndex: -1,
       currentTaskIndex2: -1,
@@ -73,7 +79,8 @@ class Employee extends Component {
       return {
         currentEmployee: {
           ...prevState.currentEmployee,
-          first_name: first_name
+          first_name: first_name,
+          invalidFirstName: first_name.length === 0 || !first_name.match(/[a-zA-Z]/)
         }
       };
     });
@@ -85,7 +92,8 @@ class Employee extends Component {
       return {
         currentEmployee: {
           ...prevState.currentEmployee,
-          last_name: last_name
+          last_name: last_name,
+          invalidLastName: last_name.length === 0 || !last_name.match(/[a-zA-Z]/)
         }
       };
     });
@@ -97,7 +105,8 @@ class Employee extends Component {
     this.setState(prevState => ({
       currentEmployee: {
         ...prevState.currentEmployee,
-        department: department
+        department: department,
+        invalidDep: department.length === 0 || !department.match(/[a-zA-Z]/)
       }
     }));
   }
@@ -115,6 +124,11 @@ class Employee extends Component {
       });
   }
   updateEmployee() {
+    
+    if (this.state.currentEmployee.invalidFirstName || this.state.currentEmployee.invalidLastName|| this.state.currentEmployee.invalidDep) { // don't save if name is invalid
+      return;
+    }
+    else
     EmployeeDataService.update(
       this.state.currentEmployee.id,
       this.state.currentEmployee
@@ -215,6 +229,7 @@ class Employee extends Component {
                   value={currentEmployee.first_name}
                   onChange={this.onChangeFirstName}
                 />
+                {this.state.currentEmployee.invalidFirstName && <div className ="invalid-first-name">Please enter a valid first name</div>}
               </div>
               <div className="form-group">
                 <label htmlFor="last_name">
@@ -227,6 +242,7 @@ class Employee extends Component {
                   value={currentEmployee.last_name}
                   onChange={this.onChangeLastName}
                 />
+                {this.state.currentEmployee.invalidLastName && <div className ="invalid-last-name">Please enter a valid last name</div>}
               </div>
               <div className="form-group">
                 <label htmlFor="description">
@@ -239,6 +255,7 @@ class Employee extends Component {
                   value={currentEmployee.department}
                   onChange={this.onChangeDepartment}
                 />
+                {this.state.currentEmployee.invalidDep && <div className ="invalid-department">Please enter a valid department name</div>}
               </div>
 
               <div className="col-md-6">

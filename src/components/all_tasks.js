@@ -88,7 +88,7 @@ export default class TaskList extends Component {
           tasks: updatedTasks,
           currentTask: null,
           currentIndex: -1
-        });
+        })
       })
       .catch(e => {
         console.log(e);
