@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 import EmployeeDataService from "../services/employee.service";
 import { withRouter } from '../common/with-router';
-
-//
-
 import TaskDataService from "../services/task.service";
 import { Link } from "react-router-dom";
 
@@ -157,10 +154,7 @@ class Employee extends Component {
 
   setEmployeeTask(e){
     var data = {
-      id: this.state.currentTask.id,
-      description: this.state.currentTask.description,
-      priority_level: this.state.currentTask.priority_level,
-      employeeId: e
+      employeeId: e,
     };
 
     TaskDataService.update(this.state.currentTask.id, data)
