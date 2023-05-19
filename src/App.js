@@ -15,28 +15,28 @@ class App extends Component {
   render() {
     return (
       <div>
-        <nav className="navbar navbar-expand navbar-dark bg-dark">
+        <nav className="navbar navbar-expand navbar-dark bg-info">
           <Link to={"/employees"} className="navbar-brand">
            Group 7
           </Link>
           <div className="navbar-nav mr-auto">
             <li className="nav-item">
-              <Link to={"/employees"} className="nav-link">
+              <Link to={"/employees"} className="nav-link  text-white">
                 Employees
               </Link>
             </li>
             <li className="nav-item">
-              <Link to={"/add_employee"} className="nav-link">
+              <Link to={"/add_employee"} className="nav-link  text-white">
                 Add Employee
               </Link>
             </li>
             <li className="nav-item">
-              <Link to={"/tasks"} className="nav-link">
+              <Link to={"/tasks"} className="nav-link  text-white">
                 Tasks
               </Link>
             </li>
             <li className="nav-item">
-              <Link to={"/add_task"} className="nav-link">
+              <Link to={"/add_task"} className="nav-link  text-white">
                 Add Task
               </Link>
             </li>
