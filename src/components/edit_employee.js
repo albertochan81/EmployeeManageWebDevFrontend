@@ -203,6 +203,7 @@ class Employee extends Component {
             >
               Update
             </button>
+            <p>{this.state.message}</p>
             <form>
               <div className="form-group">
                 <label htmlFor="first_name">
@@ -241,13 +242,17 @@ class Employee extends Component {
                 />
               </div>
 
-              <div className="col-md-6">
-              <div className="col-md-6">
+              <div className="col-lg-5">
+              <div className="col-lg-5">
           {currentTask ? (
             <div>
-              <h4>Selected Task: </h4> 
+              <h6  >Selected task:</h6>
               <div>
-                {currentTask.description}
+                {currentTask.description? (currentTask.description): (
+                  <div>
+                  <p>  &emsp; Click on a Task </p>
+                </div>
+                )}
               </div>
 
               {currentTask.employeeId !== currentEmployee.id ? (
@@ -269,7 +274,6 @@ class Employee extends Component {
             </div>
           ) : (
             <div>
-              <br />
               <p>Click on a Task </p>
             </div>
           )}
@@ -280,6 +284,8 @@ class Employee extends Component {
                 Go to task
               </Link>
         </div>
+
+
                 <label>
                   <strong>Tasks:</strong>
                 </label>
@@ -296,13 +302,11 @@ class Employee extends Component {
                         {tasks.length === 0 ? (<div><p>{"No data to display"}</p></div>):(task.description)}
                       </li>
                     ))}
-                    
 
               </div>
             </form>
-            <div className="col-md-6"> 
+            <div className="col-lg-6"> 
             <br></br>
-            
             <strong>Unassigned tasks:</strong>
 
             <ul className="list-group">
@@ -320,12 +324,8 @@ class Employee extends Component {
                 </li>
               ))}
               </ul>
-              
           </div>
           
-
-            
-            <p>{this.state.message}</p>
           </div>
         ) : (
           <div>
@@ -335,7 +335,6 @@ class Employee extends Component {
         )}
 
           
-
       </div>
     );
   }
