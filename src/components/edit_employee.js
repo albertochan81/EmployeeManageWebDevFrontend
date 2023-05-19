@@ -341,7 +341,7 @@ class Employee extends Component {
         ) : (
           <div>
             <br />
-            <p>Please click on a Employee</p>
+            <p>No Employees</p>
           </div>
         )}
 

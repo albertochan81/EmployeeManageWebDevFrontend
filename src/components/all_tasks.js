@@ -202,7 +202,7 @@ export default class TaskList extends Component {
           ) : (
             <div>
               <br />
-              <p>Click on a Task to see info </p>
+              <p>No Tasks </p>
             </div>
           )}
         </div>
