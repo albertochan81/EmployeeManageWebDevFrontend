@@ -169,12 +169,6 @@ export default class TaskList extends Component {
                 </label>
                 { employees.filter(employee => employee.id === currentTask.employeeId).map((employee, index) => (
                       <li
-                        //className={
-                         // "list-group-item " +
-                         // (index === currentIndex ? "active" : "")
-                        //}
-                       // onClick={() => this.setActiveTask(task, index)}
-                       // key={index}
                       >
                         
                         {employee.first_name + " " + employee.last_name}

@@ -2,14 +2,17 @@
   text-align: left;
   max-width: 750px;
   margin: auto;
+  border-style: inset;
 }
 
 .submit-form {
   max-width: 300px;
   margin: auto;
+  border-style: inset;
 }
 
 .edit-form {
   max-width: 300px;
   margin: auto;
+  border-style: inset;
 }
