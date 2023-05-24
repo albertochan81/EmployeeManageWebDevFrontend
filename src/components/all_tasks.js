@@ -129,7 +129,7 @@ export default class TaskList extends Component {
                   {task.description}
                   <button className="m-3 btn btn-sm btn-danger"
                   onClick={this.deleteTask}>
-                    Delete
+                    <b>X</b>
                   </button>
                 </li>
               ))
