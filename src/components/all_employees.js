@@ -128,7 +128,7 @@ export default class EmployeeList extends Component {
           ))
           : 
             <li className="list-group-item">
-              <div><p>{"No data to display"}</p></div>
+              <div><p>{"There are currently no employees listed."}</p></div>
             </li>
             }
           </ul>
