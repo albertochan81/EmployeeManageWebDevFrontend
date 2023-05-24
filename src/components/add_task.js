@@ -23,7 +23,7 @@ export default class AddTask extends Component {
   onChangePriorityLevel(e) {
     this.setState({
       priority_level: e.target.value,
-      invalidPriority: e.target.value.toLowerCase() != "high" && e.target.value.toLowerCase() != "medium" && e.target.value.toLowerCase() != "low"
+      invalidPriority: e.target.value.toLowerCase() != "very high" && e.target.value.toLowerCase() != "high" && e.target.value.toLowerCase() != "medium" && e.target.value.toLowerCase() != "low"
     });
   }
   onChangeDescription(e) {
@@ -108,7 +108,7 @@ export default class AddTask extends Component {
                 onChange={this.onChangePriorityLevel}
                 name="priority_level"
               />
-              {this.state.invalidPriority && <div className="invalid-priority">Please enter high, medium, or low </div>}
+              {this.state.invalidPriority && <div className="invalid-priority">Please enter very high, high, medium, or low </div>}
             </div>
 
             <button onClick={this.saveTask} className="btn btn-success">

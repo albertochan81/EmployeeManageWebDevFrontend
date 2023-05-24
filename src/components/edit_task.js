@@ -62,7 +62,7 @@ class Task extends Component {
         currentTask: {
           ...prevState.currentTask,
           priority_level: priority_level,
-          invalidPriority: priority_level.toLowerCase() != "high" && e.target.value.toLowerCase() != "medium" && e.target.value.toLowerCase() != "low"
+          invalidPriority: e.target.value.toLowerCase() != "very high" && priority_level.toLowerCase() != "high" && e.target.value.toLowerCase() != "medium" && e.target.value.toLowerCase() != "low"
         }
       };
     });
@@ -251,7 +251,7 @@ class Task extends Component {
                   value={currentTask.priority_level}
                   onChange={this.onChangePriorityLevel}
                 />
-                              {this.state.invalidPriority && <div className="invalid-priority">Please enter high, medium, or low </div>}
+                              {this.state.invalidPriority && <div className="invalid-priority">Please enter very high, high, medium, or low </div>}
 
               </div>
 
