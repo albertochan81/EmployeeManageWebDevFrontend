@@ -122,7 +122,7 @@ export default class EmployeeList extends Component {
             <button
               className="m-3 btn btn-sm btn-danger"
               onClick={this.deleteEmployee}>
-                Delete
+                <b>X</b>
               </button>
             </li>
           ))
